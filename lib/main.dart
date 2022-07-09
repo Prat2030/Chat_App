@@ -1,7 +1,7 @@
 import './screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
-import './screens/auth_screen.dart';
+import 'screens/auth_screen.dart';
 
 void main() {
   runApp(MyApp());
