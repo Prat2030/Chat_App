@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class NewMessage extends StatefulWidget {
@@ -7,15 +8,15 @@ class NewMessage extends StatefulWidget {
 
 class _NewMessageState extends State<NewMessage> {
   var _enteredMessage = '';
+  final _controller = TextEditingController();
 
   void _sendMessage() {
     FocusScope.of(context).unfocus();
     final message = _enteredMessage.trim();
-    if (message.isEmpty) {
-      return;
-    }
-    _enteredMessage = '';
-    setState(() {});
+    Firestore.instance.collection('chat').add({
+      'text': message,
+    });
+    _controller.clear();
   }
 
   @override
@@ -27,6 +28,7 @@ class _NewMessageState extends State<NewMessage> {
         children: <Widget>[
           Expanded(
             child: TextField(
+              controller: _controller,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Send a message...',
@@ -43,11 +45,7 @@ class _NewMessageState extends State<NewMessage> {
               Icons.send,
               color: Theme.of(context).primaryColor,
             ),
-            onPressed: _enteredMessage.trim().isEmpty
-                ? null
-                : () {
-                    _enteredMessage = '';
-                  },
+            onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
           ),
         ],
       ),
