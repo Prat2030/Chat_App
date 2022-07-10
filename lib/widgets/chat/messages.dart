@@ -5,7 +5,10 @@ class Messages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: Firestore.instance.collection('chat').snapshots(),
+      stream: Firestore.instance
+          .collection('chat')
+          .orderBy('createdAt', descending: true)
+          .snapshots(),
       builder: (ctx, streamSnapshot) {
         if (streamSnapshot.connectionState == ConnectionState.waiting) {
           return Center(
