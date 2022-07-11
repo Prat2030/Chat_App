@@ -31,6 +31,7 @@ class Messages extends StatelessWidget {
                 itemBuilder: (ctx, index) => MessageBubble(
                   message: chatDocs[index]['text'],
                   isMe: chatDocs[index]['userId'] == futureSnapshot.data.uid,
+                  userName: chatDocs[index]['username'],
                   key: ValueKey(chatDocs[index].documentID),
                 ),
               );
