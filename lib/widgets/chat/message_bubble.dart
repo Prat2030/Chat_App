@@ -80,8 +80,8 @@ class MessageBubble extends StatelessWidget {
           ),
         ),
       ],
-      overflow: Overflow.visible,
-      // clipBehavior: Clip.none,  for recent versions of flutter
+      // overflow: Overflow.visible,
+      clipBehavior: Clip.none, // for recent versions of flutter
     );
   }
 }
